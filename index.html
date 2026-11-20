@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Busters 3D Prototype</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="game-container"></div>
+
+  <!-- 上部HUD：ボスHP＆鬼玉スコア -->
+  <div id="top-hud">
+    <div id="score-box">鬼玉: <span id="onidama-count">0</span></div>
+    <div id="boss-hud">
+      <div id="boss-name">巨大赤鬼ボス</div>
+      <div class="hp-bar-bg"><div id="boss-hp-fill"></div></div>
+    </div>
+    <div id="mission-status">ボスを倒せ！</div>
+  </div>
+
+  <!-- 左下：パーティ切り替え＆HP -->
+  <div id="party-hud"></div>
+
+  <!-- 左側：バーチャルスティック（グリグリ移動） -->
+  <div id="joystick-zone">
+    <div id="joystick-base">
+      <div id="joystick-stick"></div>
+    </div>
+  </div>
+
+  <!-- 右側：アクションボタン（1ボタン＝1アクション） -->
+  <div id="action-buttons">
+    <button id="btn-ult" class="action-btn ult-btn" disabled>必殺</button>
+    <button id="btn-skill2" class="action-btn sub-btn">技2</button>
+    <button id="btn-skill1" class="action-btn sub-btn">回避</button>
+    <button id="btn-attack" class="action-btn main-btn">攻撃</button>
+  </div>
+
+  <!-- クリア・ゲームオーバー画面 -->
+  <div id="result-modal" class="hidden">
+    <h1 id="result-title">MISSION CLEAR!</h1>
+    <p id="result-desc">獲得した鬼玉: 0</p>
+    <button id="btn-restart">もう一度遊ぶ</button>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
