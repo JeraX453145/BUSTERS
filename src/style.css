@@ -1,0 +1,272 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #111;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+}
+
+#game-container {
+  position: fixed;
+  inset: 0;
+}
+
+/* 上部HUD */
+#top-hud {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#score-box, #mission-status {
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffd700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  border: 2px solid #ffd700;
+}
+
+#mission-status {
+  color: #fff;
+  border-color: #ff5555;
+}
+
+#boss-hud {
+  width: 40%;
+  max-width: 360px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#boss-name {
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.hp-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#boss-hp-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff2a2a, #ff7b00);
+  transition: width 0.1s;
+}
+
+/* パーティ切り替えUI（左上） */
+#party-hud {
+  position: fixed;
+  top: 56px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  width: 135px;
+}
+
+.member-card.active {
+  border-color: #00ffcc;
+  background: rgba(0, 80, 70, 0.8);
+}
+
+.member-card.dead {
+  opacity: 0.5;
+  border-color: #888;
+}
+
+.member-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.member-info {
+  flex: 1;
+}
+
+.mini-hp-bg {
+  width: 100%;
+  height: 5px;
+  background: #444;
+  border-radius: 3px;
+  margin-top: 3px;
+}
+
+.mini-hp-fill {
+  height: 100%;
+  background: #4cd137;
+  border-radius: 3px;
+}
+
+/* 左側バーチャルスティック */
+#joystick-zone {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 140px;
+  height: 140px;
+  z-index: 20;
+}
+
+#joystick-base {
+  width: 110px;
+  height: 110px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  position: relative;
+  margin: 15px;
+}
+
+#joystick-stick {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  position: absolute;
+  top: 29px;
+  left: 29px;
+}
+
+/* 右側アクションボタン */
+#action-buttons {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 180px;
+  height: 180px;
+  z-index: 20;
+}
+
+.action-btn {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.action-btn:active {
+  transform: scale(0.92);
+}
+
+.main-btn {
+  width: 78px;
+  height: 78px;
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(circle, #ff5e57, #d63031);
+  font-size: 18px;
+}
+
+#btn-skill1 {
+  width: 56px;
+  height: 56px;
+  bottom: 10px;
+  right: 92px;
+  background: radial-gradient(circle, #00d2d3, #01a3a4);
+  font-size: 13px;
+}
+
+#btn-skill2 {
+  width: 56px;
+  height: 56px;
+  bottom: 84px;
+  right: 68px;
+  background: radial-gradient(circle, #54a0ff, #2e86de);
+  font-size: 13px;
+}
+
+.ult-btn {
+  width: 62px;
+  height: 62px;
+  bottom: 92px;
+  right: 4px;
+  background: radial-gradient(circle, #feca57, #ff9f43);
+  color: #222;
+  font-size: 14px;
+}
+
+.ult-btn:disabled {
+  background: #555;
+  color: #999;
+  border-color: #777;
+}
+
+/* リザルト画面 */
+#result-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 100;
+}
+
+#result-modal.hidden {
+  display: none;
+}
+
+#result-title {
+  font-size: 36px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+#btn-restart {
+  margin-top: 20px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
